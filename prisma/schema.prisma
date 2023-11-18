@@ -1,0 +1,174 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String?
+  image     String?
+  stores    Store[]
+  cart      Cart?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Store {
+  id         String      @id @default(cuid())
+  name       String
+  userId     String
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  billboards Billboard[]
+  category   Category[]
+  products   Product[]
+  sizes      Size[]
+  colors     Color[]
+  orders     Order[]
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+
+  @@index([userId])
+}
+
+model Billboard {
+  id        String     @id @default(cuid())
+  name      String
+  imageUrl  String
+  storeId   String
+  store     Store      @relation(fields: [storeId], references: [id])
+  category  Category[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  @@index([storeId])
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  label       String
+  storeId     String
+  store       Store     @relation(fields: [storeId], references: [id])
+  billboardId String
+  billboard   Billboard @relation(fields: [billboardId], references: [id])
+  product     Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([storeId])
+  @@index([billboardId])
+}
+
+model Product {
+  id         String       @id @default(cuid())
+  name       String
+  price      Decimal
+  isFeatured Boolean      @default(false)
+  isArchived Boolean      @default(false)
+  isHotDeals Boolean      @default(false)
+  storeId    String
+  store      Store        @relation(fields: [storeId], references: [id])
+  categoryId String
+  category   Category     @relation(fields: [categoryId], references: [id])
+  sizeId     String
+  sizes      Size         @relation(fields: [sizeId], references: [id])
+  colorId    String
+  color      Color        @relation(fields: [colorId], references: [id])
+  cartItems  CartItem[]
+  stock      Int          @default(0)
+  images     Image[]
+  orderItems OrderItems[]
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+
+  @@index([categoryId])
+  @@index([storeId])
+  @@index([colorId])
+  @@index([sizeId])
+}
+
+model Size {
+  id        String    @id @default(cuid())
+  name      String
+  sizeValue String
+  storeId   String
+  store     Store     @relation(fields: [storeId], references: [id])
+  products  Product[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@index([storeId])
+}
+
+model Color {
+  id         String    @id @default(cuid())
+  name       String
+  colorValue String
+  storeId    String
+  store      Store     @relation(fields: [storeId], references: [id])
+  products   Product[]
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  @@index([storeId])
+}
+
+model Image {
+  id        String   @id @default(cuid())
+  url       String
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([productId])
+}
+
+model Order {
+  id         String       @id @default(cuid())
+  isPaid     Boolean      @default(false)
+  phone      String       @default("")
+  address    String       @default("")
+  storeId    String
+  store      Store        @relation(fields: [storeId], references: [id])
+  orderItems OrderItems[]
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+
+  @@index([storeId])
+}
+
+model OrderItems {
+  id        String  @id @default(cuid())
+  orderId   String
+  order     Order   @relation(fields: [orderId], references: [id])
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+
+  @@index([orderId])
+  @@index([productId])
+}
+
+model Cart {
+  id     String     @id @default(cuid())
+  items  CartItem[]
+  userId String     @unique
+  user   User       @relation(fields: [userId], references: [id])
+}
+
+model CartItem {
+  id        String  @id @default(cuid())
+  cartId    String
+  cart      Cart    @relation(fields: [cartId], references: [id])
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  quantity  Int
+}
