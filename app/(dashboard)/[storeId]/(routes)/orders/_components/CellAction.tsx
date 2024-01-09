@@ -1,6 +1,5 @@
 "use client";
 import React, { FC } from "react";
-import { CategoryColumn } from "./columns";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,6 +13,7 @@ import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { toast } from "sonner";
 import axios from "axios";
+import { CategoryColumn } from "../../categories/_components/columns";
 
 type props = {
   data: CategoryColumn;

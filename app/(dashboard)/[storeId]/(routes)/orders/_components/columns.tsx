@@ -1,8 +1,6 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import CellAction from "./CellAction";
-import { ArrowUpDown } from "lucide-react";
 
 export type OrderColumn = {
   id: string;
@@ -16,32 +14,23 @@ export type OrderColumn = {
 
 export const columns: ColumnDef<OrderColumn>[] = [
   {
-    accessorKey: "name",
-    header: ({ column }) => {
-      return (
-        <div
-          role="button"
-          className="flex hover:underline"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Name
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </div>
-      );
-    },
+    accessorKey: "products",
+    header: "Products",
   },
   {
-    accessorKey: "billboardName",
-    header: "Billboard",
-    cell: ({ row }) => row.original.billboardName,
+    accessorKey: "phone",
+    header: "Phone",
   },
   {
-    accessorKey: "createdAt",
-    header: "Date",
+    accessorKey: "address",
+    header: "Address",
   },
   {
-    id: "actions",
-    header: "Actions",
-    cell: ({ row }) => <CellAction data={row.original} />,
+    accessorKey: "totalPrice",
+    header: "Total price",
+  },
+  {
+    accessorKey: "isPaid",
+    header: "Paid",
   },
 ];
