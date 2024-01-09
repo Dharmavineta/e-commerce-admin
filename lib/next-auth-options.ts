@@ -3,7 +3,6 @@ import bcrypt from "bcryptjs";
 import CredentialsProvider from "next-auth/providers/credentials";
 import prismaDB from "./db";
 import GoogleProvider from "next-auth/providers/google";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
 type User = { id: string };
 declare module "next-auth" {
