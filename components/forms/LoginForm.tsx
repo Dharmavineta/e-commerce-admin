@@ -64,6 +64,11 @@ const LoginForm = () => {
       })
       .finally(() => setIsLoading(false));
   };
+
+  const handleGuest = () => {
+    form.setValue("email", "krishna@gmail.com");
+    form.setValue("password", "123kri123");
+  };
   return (
     <div className="w-full flex items-center justify-center">
       <Card className=" max-w-lg w-full">
@@ -132,6 +137,10 @@ const LoginForm = () => {
                 type="submit"
               >
                 {isLoading ? <Ring color="white" size={25} /> : <>Login</>}
+              </Button>
+              <Button variant={"outline"} onClick={handleGuest}>
+                {" "}
+                Login using guest credentials
               </Button>
             </form>
           </Form>

@@ -47,7 +47,6 @@ const categorySchema = z.object({
 export type CategoryFormType = z.infer<typeof categorySchema>;
 
 const CategoryForm: FC<props> = ({ category, billboards }) => {
-  console.log(category);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const params = useParams();
