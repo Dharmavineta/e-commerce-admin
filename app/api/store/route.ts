@@ -7,10 +7,8 @@ export async function POST(req: Request) {
   try {
     const body: createStoreType = await req.json();
     const session = await getAuthSession();
-    console.log(body);
 
     const userId = session?.user.id;
-    console.log(userId);
     if (!userId) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
