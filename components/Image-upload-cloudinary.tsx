@@ -48,7 +48,7 @@ const CloudinaryImageUpload: FC<props> = ({
           </div>
         ))}
       </div>
-      <CldUploadWidget onUpload={onUpload} uploadPreset="vznqihmj">
+      <CldUploadWidget onUpload={onUpload} uploadPreset="tzv00osl">
         {({ open }) => {
           const handleClick = (e: React.MouseEvent) => {
             e.preventDefault();

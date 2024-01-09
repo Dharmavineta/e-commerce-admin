@@ -29,7 +29,7 @@ const OrderData: FC<props> = ({ orders }) => {
           onClick={() => router.push(`/${params.storeId}/orders/new`)}
         >
           <Plus className="w-4 h-4 mr-2" />
-          Create Category
+          Create Order
         </Button>
       </div>
       <Separator />

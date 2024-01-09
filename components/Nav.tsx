@@ -73,12 +73,6 @@ const Nav: FC<props> = ({ className, ...props }) => {
       active: pathName === `/${params.storeId}/orders`,
       icon: SendToBack,
     },
-    {
-      label: "Settings",
-      href: `/${params.storeId}/settings`,
-      active: pathName === `/${params.storeId}/settings`,
-      icon: Settings,
-    },
   ];
 
   return (
@@ -112,7 +106,7 @@ const Nav: FC<props> = ({ className, ...props }) => {
             <DropdownMenuSeparator />
             <DropdownMenuGroup className="space-y-2">
               {routes.map((route, i, arr) => (
-                <DropdownMenuItem key={route.href}>
+                <DropdownMenuItem key={route.href} asChild>
                   <Link
                     className={cn(
                       "w-full flex  group",

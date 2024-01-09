@@ -6,6 +6,7 @@ import { getAuthSession } from "@/lib/next-auth-options";
 import { Button } from "../ui/button";
 import { signOut } from "next-auth/react";
 import LogoutButton from "../LogoutButton";
+import Link from "next/link";
 
 const Navbar = async () => {
   const session = await getAuthSession();
@@ -24,7 +25,13 @@ const Navbar = async () => {
           <SwitchStores stores={stores} />
           <Nav />
         </div>
-        <LogoutButton />
+        {/* {userId ? (
+          <LogoutButton />
+        ) : (
+          <Button variant={"link"} className="text-muted-foreground" asChild>
+            <Link href={"/login"}>Login</Link>
+          </Button>
+        )} */}
       </div>
     </div>
   );

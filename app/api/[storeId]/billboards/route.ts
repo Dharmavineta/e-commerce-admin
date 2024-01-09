@@ -9,7 +9,6 @@ export async function POST(
 ) {
   try {
     const body: billboardFormType = await req.json();
-
     const { imageUrl, name } = body;
 
     const session = await getAuthSession();
