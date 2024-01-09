@@ -20,7 +20,6 @@ import {
   FormLabel,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { ImageUpload } from "@/components/image-upload";
 import {
   Select,
   SelectContent,
