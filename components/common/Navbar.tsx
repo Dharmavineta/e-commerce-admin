@@ -3,6 +3,9 @@ import Nav from "../Nav";
 import SwitchStores from "../SwitchStores";
 import prismaDB from "@/lib/db";
 import { getAuthSession } from "@/lib/next-auth-options";
+import { Button } from "../ui/button";
+import { signOut } from "next-auth/react";
+import LogoutButton from "../LogoutButton";
 
 const Navbar = async () => {
   const session = await getAuthSession();
@@ -21,6 +24,7 @@ const Navbar = async () => {
           <SwitchStores stores={stores} />
           <Nav />
         </div>
+        <LogoutButton />
       </div>
     </div>
   );

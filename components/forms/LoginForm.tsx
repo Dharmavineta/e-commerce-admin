@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { Ring } from "@uiball/loaders";
@@ -139,7 +138,6 @@ const LoginForm = () => {
                 {isLoading ? <Ring color="white" size={25} /> : <>Login</>}
               </Button>
               <Button variant={"outline"} onClick={handleGuest}>
-                {" "}
                 Login using guest credentials
               </Button>
             </form>
