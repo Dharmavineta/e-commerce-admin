@@ -6,6 +6,7 @@ import { NextResponse } from "next/server";
 export async function POST(req: Request) {
   try {
     const body: createStoreType = await req.json();
+
     const session = await getAuthSession();
 
     const userId = session?.user.id;
@@ -23,6 +24,7 @@ export async function POST(req: Request) {
         userId,
       },
     });
+    console.log(store);
 
     return NextResponse.json(store, { status: 201 });
   } catch (error) {
