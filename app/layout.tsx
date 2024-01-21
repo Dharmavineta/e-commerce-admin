@@ -12,7 +12,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "CartCraze admin",
   description: "The best e-commerce platform for your business",
-  icons: [{ href: "/logo.svg", url: "/logo.svg" }],
+  icons: [{ href: "/logo.png", url: "/logo.png" }],
 };
 
 export default async function RootLayout({
